@@ -1,4 +1,5 @@
 # Структура проекта
+```
 kustomization/
 ├── base/
 │   ├── deployment.yaml
@@ -14,7 +15,7 @@ kustomization/
     └── prod/
         ├── kustomization.yaml
         └── index.html
-
+```
 1. Базовые файлы
 
 base/deployment.yaml
@@ -130,8 +131,6 @@ overlays/test/index.html
 
 Как применить:
 Для деплоя в нужное окружение выполните:
-
-bash
 ```bash
 kubectl apply -k overlays/dev/      
 kubectl apply -k overlays/test/    
