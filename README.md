@@ -39,8 +39,7 @@ ansible-playbook -i inventory/mycluster/hosts.yaml cluster.yml -b -v &
 mkdir ~/.kube
 sudo cp /etc/kubernetes/admin.conf ~/.kube/config
 sudo chown $(id -u):$(id -g) ~/.kube/config
-
-
+```
 
 # Структура проекта
 ```
