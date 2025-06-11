@@ -1,3 +1,47 @@
+```bash
+sudo apt-get update -y
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update -y
+sudo apt-get install git pip python3.13 -y
+
+sudo -i
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3.9 get-pip.py
+
+
+
+# RETURN TO USER
+VENVDIR=kubespray-venv
+KUBESPRAYDIR=kubespray
+python3 -m venv $VENVDIR
+source $VENVDIR/bin/activate
+cd $KUBESPRAYDIR
+pip install -U -r requirements.txt
+ ./contrib/offline/generate_list.shgit clone https://github.com/kubernetes-sigs/kubespray.git
+cd kubespray/
+pip3.13 install -r requirements.txt
+
+# Copy ``inventory/sample`` as ``inventory/mycluster``
+cp -rfp inventory/sample inventory/mycluster
+
+
+# Copy private ssh key to ansible host
+ssh-keygen
+ssh-copy-id vboxuser@192.168.100.34
+ssh-copy-id vboxuser@192.168.100.35
+ssh-copy-id vboxuser@192.168.100.37
+sudo chmod 600 ~/.ssh/id_rsa
+
+ansible-playbook -i inventory/mycluster/hosts.yaml cluster.yml -b -v &
+
+
+mkdir ~/.kube
+sudo cp /etc/kubernetes/admin.conf ~/.kube/config
+sudo chown $(id -u):$(id -g) ~/.kube/config
+
+
+
 # Структура проекта
 ```
 kustomization/
