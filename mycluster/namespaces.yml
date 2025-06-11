@@ -1,0 +1,30 @@
+---
+- name: Создание namespace в Kubernetes
+  hosts: localhost
+  tasks:
+    - name: Создать namespace test
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: test
+
+    - name: Создать namespace dev
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: dev
+
+    - name: Создать namespace prod
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: prod
